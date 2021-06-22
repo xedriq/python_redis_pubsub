@@ -1,10 +1,9 @@
-import os
 import redis
-import json
+import time
 
 from multiprocessing import Process
 
-redis_conn = redis.Redis(charset="utf-8", decode_responses=True)
+redis_conn = redis.Redis(host='localhost', port='6377', charset="utf-8", decode_responses=True)
 
 def sub(name: str):
    pubsub = redis_conn.pubsub()
@@ -13,6 +12,8 @@ def sub(name: str):
     #    data = json.loads(message.get("data"))
        print(message.get('data'))
        print('do something!!!')
+       time.sleep(10)
+       print('done!!!')
 
 
 if __name__ == "__main__":
